@@ -152,10 +152,11 @@
       // Cohete en miniatura: solo se ve durante el lanzamiento.
       sat.rocketEl = node("g", { class: "sat-rocket" }, g);
       var rocket = node("g", { transform: "scale(0.3) translate(-24 -36)" }, sat.rocketEl);
-      node("path", { d: "M17 66 C17 78 21 86 24 94 C27 86 31 78 31 66 Z", fill: "#ff7a3d" }, rocket);
-      node("path", { d: "M14 46 L5 64 L5 69 L15 63 Z", fill: "#c9a27e" }, rocket);
-      node("path", { d: "M34 46 L43 64 L43 69 L33 63 Z", fill: "#c9a27e" }, rocket);
-      node("path", { d: "M24 3 C33 13 36 27 36 42 V60 C36 62 34.5 63 33 63 H15 C13.5 63 12 62 12 60 V42 C12 27 15 13 24 3 Z", fill: "#f4f6f8" }, rocket);
+      // Los colores van por clase (style.css) para que sigan al tema claro u oscuro.
+      node("path", { class: "sat-rocket-flame", d: "M17 66 C17 78 21 86 24 94 C27 86 31 78 31 66 Z" }, rocket);
+      node("path", { class: "sat-rocket-fin", d: "M14 46 L5 64 L5 69 L15 63 Z" }, rocket);
+      node("path", { class: "sat-rocket-fin", d: "M34 46 L43 64 L43 69 L33 63 Z" }, rocket);
+      node("path", { class: "sat-rocket-body", d: "M24 3 C33 13 36 27 36 42 V60 C36 62 34.5 63 33 63 H15 C13.5 63 12 62 12 60 V42 C12 27 15 13 24 3 Z" }, rocket);
 
       // Satélite en órbita: cuerpo y dos paneles.
       var probe = node("g", { class: "sat-probe" }, g);
