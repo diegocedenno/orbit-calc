@@ -4,7 +4,9 @@
 >
 > Una calculadora con consola de nave: cada resultado se lanza a una órbita y queda como satélite que puedes tocar para reutilizarlo.
 
-![orbit-calc preview](docs/preview.png)
+**[Live demo · Demo en vivo →](https://diegocedenno.github.io/orbit-calc/)**
+
+[![orbit-calc preview](docs/preview.png)](https://diegocedenno.github.io/orbit-calc/)
 
 **[English](#english)** · **[Español](#español)**
 
