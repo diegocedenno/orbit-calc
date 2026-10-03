@@ -1,0 +1,373 @@
+/* orbit-calc — estilos propios. Los tokens y la base viven en assets/tokens.css */
+
+.layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+  grid-template-areas: "stage calc";
+  align-items: center;
+  gap: var(--s-6);
+}
+
+/* ---------- escena ---------- */
+
+.stage {
+  --k: 1;
+  grid-area: stage;
+  position: relative;
+  min-width: 0;
+  height: clamp(360px, calc(100dvh - 190px), 640px);
+}
+
+.stage-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.stage-hud {
+  position: absolute;
+  left: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.stage-hud--tl {
+  top: 0;
+}
+
+.stage-hud--bl {
+  bottom: 0;
+}
+
+.stage-clear {
+  position: absolute;
+  top: -6px;
+  right: 0;
+  min-height: 32px;
+  padding: 0 var(--s-3);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-2);
+  transition:
+    color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.stage-clear:hover {
+  color: var(--alert);
+  border-color: var(--alert);
+}
+
+/* Toque cómodo sin agrandar el botón a la vista */
+.stage-clear::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+}
+
+.pulse {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.trail {
+  fill: none;
+  stroke: var(--alert);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.7;
+}
+
+.sat {
+  cursor: pointer;
+  outline: none;
+  transition: opacity 400ms var(--ease-out);
+}
+
+.sat-hit {
+  fill: transparent;
+}
+
+.sat-focus {
+  fill: none;
+  stroke: var(--cold);
+  stroke-width: 1.5;
+  opacity: 0;
+  transition: opacity var(--t-fast) var(--ease-out);
+}
+
+.sat:focus-visible .sat-focus {
+  opacity: 1;
+}
+
+.sat-ping {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.sat-probe,
+.sat-label,
+.sat-rocket {
+  transition: opacity 450ms var(--ease-out);
+}
+
+.sat-probe circle {
+  fill: var(--text);
+  transition: fill var(--t-fast) var(--ease-out);
+}
+
+.sat-probe rect {
+  fill: var(--cold);
+}
+
+.sat:hover .sat-probe circle,
+.sat:focus-visible .sat-probe circle {
+  fill: var(--accent);
+}
+
+.sat-label {
+  font-family: var(--font-mono);
+  font-size: calc(12px * var(--k));
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  fill: var(--text);
+  stroke: var(--bg);
+  stroke-width: calc(4px * var(--k));
+  stroke-linejoin: round;
+  paint-order: stroke;
+  pointer-events: none;
+}
+
+.sat:hover .sat-label,
+.sat:focus-visible .sat-label {
+  fill: var(--accent);
+}
+
+.sat-rocket {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sat.is-launching .sat-rocket {
+  opacity: 1;
+}
+
+.sat.is-launching .sat-probe,
+.sat.is-launching .sat-label {
+  opacity: 0;
+}
+
+.sat.is-leaving,
+.sat.is-fading-in {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- consola ---------- */
+
+.calc {
+  grid-area: calc;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  padding: var(--s-4);
+}
+
+.calc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calc-leds {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.calc-leds i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border);
+}
+
+.calc-leds i:first-child {
+  background: var(--accent);
+}
+
+.display {
+  padding: var(--s-3) var(--s-4);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: right;
+  overflow: hidden;
+}
+
+.display-sub {
+  min-height: 1.5em;
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.display-main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 3.25rem;
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1;
+  white-space: pre;
+  overflow: hidden;
+  transition: color var(--t-med) var(--ease-out);
+}
+
+.display-main[data-size="m"] {
+  font-size: 1.625rem;
+}
+
+.display-main[data-size="s"] {
+  font-size: 1.125rem;
+}
+
+.display-main.is-result {
+  color: var(--accent);
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-2);
+}
+
+.key {
+  display: grid;
+  place-items: center;
+  height: 56px;
+  padding: 0;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  color: var(--text);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform var(--t-fast) var(--ease-out),
+    background-color var(--t-fast) var(--ease-out),
+    border-color var(--t-fast) var(--ease-out);
+}
+
+.key:hover {
+  border-color: var(--border-strong);
+}
+
+.key:active,
+.key.is-pressed {
+  transform: scale(0.94);
+  background: #262e39;
+  border-color: var(--border-strong);
+}
+
+.key--op {
+  color: var(--accent);
+  font-size: 1.375rem;
+}
+
+.key--fn {
+  color: var(--text-2);
+}
+
+.key--danger {
+  color: var(--alert);
+  font-size: var(--fs-md);
+  letter-spacing: 0.06em;
+}
+
+.key--go {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+.key--go:hover {
+  border-color: #e0c2a6;
+}
+
+.key--go:active,
+.key--go.is-pressed {
+  background: #d6b393;
+  border-color: #d6b393;
+}
+
+.calc-hint {
+  line-height: 1.6;
+}
+
+.console.is-error,
+.console.is-error b {
+  color: var(--alert);
+}
+
+/* ---------- pantallas estrechas ---------- */
+
+@media (max-width: 860px) {
+  .page {
+    gap: var(--s-4);
+  }
+
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "stage"
+      "calc";
+    align-items: start;
+    gap: var(--s-4);
+  }
+
+  .stage {
+    height: clamp(200px, 30dvh, 300px);
+  }
+
+  .calc {
+    width: 100%;
+    max-width: 460px;
+    margin-inline: auto;
+    gap: var(--s-3);
+  }
+
+  .key {
+    height: 50px;
+  }
+
+  .calc-hint {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .calc-hint {
+    display: none;
+  }
+}
