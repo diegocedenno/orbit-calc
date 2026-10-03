@@ -20,6 +20,7 @@
 - The result lifts off from Pluto on a small rocket, spirals outward and settles into one of four dashed orbits.
 - Up to eight results stay in orbit as your history. Tap one — or focus it with `Tab` and press `Enter` — to drop its value back into the current expression.
 - History survives a reload (`localStorage`).
+- A switch in the header flips between dark and light mode: the same sky redrawn as a star chart on paper. The choice is remembered and shared across the Plutón series.
 
 ### What makes it technically interesting
 
@@ -60,6 +61,7 @@ It also works as-is on GitHub Pages.
 - El resultado despega de Plutón en un pequeño cohete, sale en espiral y se asienta en una de cuatro órbitas punteadas.
 - Hasta ocho resultados quedan en órbita como historial. Toca uno —o enfócalo con `Tab` y pulsa `Enter`— para devolver su valor a la expresión en curso.
 - El historial sobrevive a una recarga (`localStorage`).
+- Un interruptor en la cabecera alterna entre modo oscuro y claro: el mismo cielo redibujado como carta estelar sobre papel. La elección se recuerda y se comparte entre los proyectos de la serie Plutón.
 
 ### Qué lo hace interesante técnicamente
 
